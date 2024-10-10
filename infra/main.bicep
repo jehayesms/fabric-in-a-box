@@ -41,7 +41,6 @@ var tags = {
   'azd-env-name': environmentName
   }
 
-var wwiBacpacUri = 'https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Standard.bacpac'
 
 var vprefix = toLower('${resourcePrefix}')
 var vsuffix = toLower('${resourceSuffix}')
