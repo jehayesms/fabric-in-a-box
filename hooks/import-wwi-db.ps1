@@ -29,8 +29,7 @@ $storageKey = az keyvault secret show --name storage-account-key --vault-name $k
 Invoke-WebRequest -Uri $wwiBacpacUri -OutFile $outputFilePath
 
 # get storageAccount context using the key
-$ctx = New-AzStorageContext -StorageAccountName $storageAccountName `
-                            -StorageAccountKey $storageKey
+$ctx = New-AzStorageContext -StorageAccountName "$storageAccountName" -StorageAccountKey "$storageKey"
 
 # create container if not exists and copy blob
 Set-AzStorageBlobContent -Context $ctx `
