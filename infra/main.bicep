@@ -41,7 +41,6 @@ var tags = {
   'azd-env-name': environmentName
   }
 
-var wwiBacpacUri = 'https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Standard.bacpac'
 
 var vprefix = toLower('${resourcePrefix}')
 var vsuffix = toLower('${resourceSuffix}')
@@ -49,6 +48,7 @@ var vsuffix = toLower('${resourceSuffix}')
 var keyVaultName = '${vprefix}-${abbrs.keyVaultVaults}${vsuffix}'
 var storageAccountName = '${replace(vprefix,'-','0')}0${abbrs.storageStorageAccounts}0${replace(vsuffix,'-','0')}'
 var sqlServerName = '${vprefix}-${abbrs.sqlServers}${vsuffix}'
+var fabricCapacityName = '${vprefix}fabriccapacity${vsuffix}'
 
 // Organize resources in a resource group
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
@@ -119,6 +119,26 @@ module sqlServer './core/database/sqlserver/sqlserver.bicep' = {
     storageAccount
     //storageUploadFile
     keyvault
+  ]
+}
+
+module fabricCapacity './core/msfabric/fabric-capacity.bicep' = {
+  name: 'fabricCapacity'
+  scope: rg
+  params: {
+    location: location
+    name: fabricCapacityName
+    tags: tags
+    sku: {
+      name: 'F2'
+      tier: 'Fabric'
+    }
+    members: [
+      upn
+    ]
+  }
+  dependsOn: [
+    sqlServer
   ]
 }
 

@@ -19,7 +19,6 @@ if (-not (Test-Path -Path $bacpacsDir)) {
 # Define the full path to the output file
 $outputFilePath = Join-Path -Path $bacpacsDir -ChildPath $fileName
 
-
 $sqlPassword = az keyvault secret show --name sql-admin-password --vault-name $keyVaultName --query value -o tsv
 $storageKey = az keyvault secret show --name storage-account-key --vault-name $keyVaultName --query value -o tsv
 
@@ -29,8 +28,7 @@ $storageKey = az keyvault secret show --name storage-account-key --vault-name $k
 Invoke-WebRequest -Uri $wwiBacpacUri -OutFile $outputFilePath
 
 # get storageAccount context using the key
-$ctx = New-AzStorageContext -StorageAccountName $storageAccountName `
-                            -StorageAccountKey $storageKey
+$ctx = New-AzStorageContext -StorageAccountName "$storageAccountName" -StorageAccountKey "$storageKey"
 
 # create container if not exists and copy blob
 Set-AzStorageBlobContent -Context $ctx `
