@@ -49,6 +49,7 @@ resource storage 'Microsoft.Storage/storageAccounts@2022-05-01' = {
     networkAcls: networkAcls
     publicNetworkAccess: publicNetworkAccess
     supportsHttpsTrafficOnly: supportsHttpsTrafficOnly
+    isHnsEnabled: true
   }
 
   resource blobServices 'blobServices' = if (!empty(containers)) {
