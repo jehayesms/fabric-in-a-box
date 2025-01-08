@@ -28,6 +28,6 @@ hooks:
       continueOnError: false
     posix:
       shell: sh
-      run: ./hooks/import-wwi-db.sh
+      run: ./hooks/import-wwi-db.ps1
       interactive: true
       continueOnError: false        
