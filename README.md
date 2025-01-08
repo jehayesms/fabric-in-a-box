@@ -52,6 +52,18 @@ Provide instructions on how to deploy the solutione:
 
 1. **Prerequisites**: List any requirements for using this solution (e.g., software, accounts).
 2. **Installation**: Step-by-step instructions for deploying the solution to Azure.
+   1. Log into Azure
+   2. Open an Azure Cloud Shell session for PowerShell
+   3. Run these commands:
+
+      ```powershell
+      mkdir fabric
+      cd fabric
+      azd init -t <replace-with-url-for-this-repo>
+      chmod +xr hooks/get-upn.ps1
+      chmod +xr hooks/import-wwi-db.ps1
+      azd up ```
+
 3. **Post Deployment**: Include any instructions that the user may need to do after the resources have been deployed; for example, upload files to blob storage, create an ML or an AI Services project
 
 ## Run the Solution
